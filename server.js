@@ -14,11 +14,11 @@ app.set("view engine", "ejs");
 app.use("/public", express.static(path.join(__dirname, "static")));
 app.use("/peerjs", peerServer);
 
-app.get("/meet", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "static", "index.html"));
 });
 
-app.get("/meet/join", (req, res) => {
+app.get("/join", (req, res) => {
   res.redirect(
     url.format({
       pathname: `/join/${uuidv4()}`,
@@ -27,7 +27,7 @@ app.get("/meet/join", (req, res) => {
   );
 });
 
-app.get("/meet/joinold", (req, res) => {
+app.get("/joinold", (req, res) => {
   res.redirect(
     url.format({
       pathname: req.query.meeting_id,
@@ -36,7 +36,7 @@ app.get("/meet/joinold", (req, res) => {
   );
 });
 
-app.get("/meet/join/:rooms", (req, res) => {
+app.get("/join/:rooms", (req, res) => {
   res.render("room", { roomid: req.params.rooms, Myname: req.query.name });
 });
 
